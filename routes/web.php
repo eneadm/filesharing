@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+    Route::get('/', \App\Http\Controllers\DashboardController::class)->name('dashboard');
+
+    Route::get('/documents/{document}', [\App\Http\Controllers\DocumentController::class, 'show'])->name('document.show');
+    Route::get('/documents/{document}/download', [\App\Http\Controllers\DocumentController::class, 'download'])->name('document.download');
+});

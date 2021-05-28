@@ -17,6 +17,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/', \App\Http\Controllers\DashboardController::class)->name('dashboard');
 
-    Route::get('/documents/{document}', [\App\Http\Controllers\DocumentController::class, 'show'])->name('document.show');
-    Route::get('/documents/{document}/download', [\App\Http\Controllers\DocumentController::class, 'download'])->name('document.download');
+    Route::middleware('has.document')->group(function () {
+        Route::get('/documents/{document}', [\App\Http\Controllers\DocumentController::class, 'show'])->name('document.show');
+        Route::get('/documents/{document}/download', [\App\Http\Controllers\DocumentController::class, 'download'])->name('document.download');
+    });
 });

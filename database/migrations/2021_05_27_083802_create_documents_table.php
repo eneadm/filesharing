@@ -18,8 +18,6 @@ class CreateDocumentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('extension');
-            $table->string('preview')->nullable();
-            $table->string('details')->nullable();
             $table->string('path');
             $table->timestamps();
 
